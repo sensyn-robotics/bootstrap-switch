@@ -1,7 +1,7 @@
 /**
   * bootstrap-switch - Turn checkboxes and radio buttons into toggle switches.
   *
-  * @version v3.3.5
+  * @version v3.4.0
   * @homepage https://bttstrp.github.io/bootstrap-switch
   * @author Mattia Larentis <mattia@larentis.eu> (http://larentis.eu)
   * @license MIT
@@ -79,7 +79,7 @@
         inverse = options.inverse;
 
     return [state ? 'on' : 'off', size, disabled ? 'disabled' : undefined, readonly ? 'readonly' : undefined, indeterminate ? 'indeterminate' : undefined, inverse ? 'inverse' : undefined, id ? 'id-' + id : undefined].filter(function (v) {
-      return v == null;
+      return v != null;
     });
   }
 
@@ -129,7 +129,7 @@
   function prvcontainerPosition() {
     var _this2 = this;
 
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.ope;
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.options.state;
 
     this.$container.css('margin-left', function () {
       var values = [0, '-' + _this2.privateHandleWidth + 'px'];
@@ -345,7 +345,7 @@
   function prvgetClasses(classes) {
     var _this8 = this;
 
-    if (!$.isArray(classes)) {
+    if (!Array.isArray(classes)) {
       return [prvgetClass.call(this, classes)];
     }
     return classes.map(function (v) {
@@ -373,15 +373,15 @@
       });
       this.$container = $('<div>', { class: prvgetClass.call(this, 'container') });
       this.$on = $('<span>', {
-        html: this.options.onText,
+        text: this.options.onText,
         class: prvgetClass.call(this, 'handle-on') + ' ' + prvgetClass.call(this, this.options.onColor)
       });
       this.$off = $('<span>', {
-        html: this.options.offText,
+        text: this.options.offText,
         class: prvgetClass.call(this, 'handle-off') + ' ' + prvgetClass.call(this, this.options.offColor)
       });
       this.$label = $('<span>', {
-        html: this.options.labelText,
+        text: this.options.labelText,
         class: prvgetClass.call(this, 'label')
       });
 
@@ -606,7 +606,7 @@
         if (typeof value === 'undefined') {
           return this.options.onText;
         }
-        this.$on.html(value);
+        this.$on.text(value);
         prvwidth.call(this);
         prvcontainerPosition.call(this);
         this.options.onText = value;
@@ -618,7 +618,7 @@
         if (typeof value === 'undefined') {
           return this.options.offText;
         }
-        this.$off.html(value);
+        this.$off.text(value);
         prvwidth.call(this);
         prvcontainerPosition.call(this);
         this.options.offText = value;
@@ -630,7 +630,7 @@
         if (typeof value === 'undefined') {
           return this.options.labelText;
         }
-        this.$label.html(value);
+        this.$label.text(value);
         prvwidth.call(this);
         this.options.labelText = value;
         return this.$element;
@@ -756,7 +756,7 @@
     offColor: 'default',
     onText: 'ON',
     offText: 'OFF',
-    labelText: '&nbsp',
+    labelText: '\xa0',
     handleWidth: 'auto',
     labelWidth: 'auto',
     baseClass: 'bootstrap-switch',
